@@ -175,13 +175,17 @@ namespace DotSpatial.Controls
                     _layers.Clear();
                     if (Map.MapControl != null)
                     {
-                        for (int i = Map.MapControl.Layers.Count - 1; i >= 0; i--)
+                        // find all the layers in the map - not including "mapgroup" type layers
+                        foreach (var layer in Map.MapControl.GetAllLayers())
                         {
-                            if (Map.MapControl.Layers[i].Checked)
+                            if (layer is IMapLayer lyr && lyr.Checked)
                             {
-                                _layers.Add(Map.MapControl.Layers[i]);
+                                _layers.Add(lyr);
                             }
                         }
+
+                        // reverse the list so that they draw in the correct order
+                        _layers.Reverse();
                     }
 
                     UpdateThumbnail();
@@ -266,10 +270,9 @@ namespace DotSpatial.Controls
             // Loops through all of the legend items and populates the legend
             foreach (IMapLayer mapLayer in _layers)
             {
-                if (mapLayer.LegendItems == null)
-                    DrawLegendItem(g, mapLayer, itemSize, ref col, ref row, ref maxCol, ref maxRow);
-                else
-                    DrawLegendList(g, mapLayer.LegendItems, itemSize, ref col, ref row, ref maxCol, ref maxRow);
+                IMapLayer mapLayerClone = (IMapLayer)mapLayer.Clone();
+                DrawLegendItem(g, mapLayerClone, itemSize, ref col, ref row, ref maxCol, ref maxRow);
+                DrawLegendList(g, mapLayerClone.LegendItems, itemSize, ref col, ref row, ref maxCol, ref maxRow);
             }
 
             // Restored the old graphics settings
@@ -288,6 +291,11 @@ namespace DotSpatial.Controls
             }
 
             g.TranslateTransform(LocationF.X + (col * itemSize.Width), LocationF.Y + (row * itemSize.Height));
+            if (item.LegendText is null)
+            {
+                item.LegendText = string.Empty;
+            }
+
             item.PrintLegendItem(g, _font, _color, itemSize);
             g.TranslateTransform(-(LocationF.X + (col * itemSize.Width)), -(LocationF.Y + (row * itemSize.Height)));
             row++;
