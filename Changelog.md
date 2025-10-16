@@ -3,6 +3,65 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- A plug-in that converts coordinates from one projection to another (#1469)
+- Added a coordinate system type field to ProjectionInfo (#1473)
+- MapPointLayer.PreventCollisions to remove unnecessary points for drawing if they have been overlapped by other points (#1462)
+- Added Fathom as a DistanceUnit (#1422) 
+
+### Changed
+ - Change the code in "GenerateCentroid.cs" (#1465)
+ - Upgraded Examples to .NET Core 6 projects (#1485)
+
+### Fixed
+- Polygon Labeler Crash with Mercator or Orthographic projection (#1199) 
+- LineOrientation fix for Parallel/Perpendicular labels (#1466)
+- Added tests to Appveyor Tests tab (#1489)
+- Shorten column names to max 10 characters on writing to dbf file (#1494)
+- DotSpatial.Plugins.Taudem/Hydrology.cs RunTaudem function does not execute correctly (#1496) 
+- Taudem set stream shape prj file (#1501)
+- Selection issue if LabelLayer is present and EditMode=true (#1519)
+
+## V4.0
+
+### Changed
+- Switched to VS2022
+- Switched to .Net 6
+
+### Fixed
+- Fixed angle calculation for second and third quadrant (#1405) 
+
+## V3.0.1
+
+### Added
+- Label Setup dialog can now accept any font size (#1434)
+
+### Fixed
+- Error when using wildcards in Symbology FilterExpression (#1160)
+
+## V3.0
+
+### Added
+- JGD2011, EPSG from 6669 to 6687 (#1262)
+- Feature of determining the delta azimuth of three consecutive points (#1360)
+- InterSectionTool (#945) 
+
+### Changed
+- Switched to VS2019
+- Switched to .Net Framework 4.7.2
+- Updated StyleCop.Analyzers to 1.1.118
+- Switched from DotSpatial.NetTopologySuite/DotSpatial.GeoAPI to NetTopologySuite 2.4.0
+- Updated NUnit to 3.13.2
+
+### Fixed
+- Bug in extent calculation in WebMap plugin (#1367)
+- Issues related to the Plate Carree projection (#1078)
+- Multiple Changes on handling of GsdNadTable (#1059) 
+- Naming of UTMNad1983 coordinate systems (#1423)
+- Failed to load spatialite layer (#1415) 
+
+## V2.0.1
+
 Be aware that code written for 1.9 will not work out of the box because DotSpatial.Topology was replaced by DotSpatial.GeoAPI and DotSpatial.NetTopologySuite (#786). Have a look at the [Wiki](https://github.com/DotSpatial/DotSpatial/wiki/Switching-from-DotSpatial-1.9-to-2.0) for more information.
 
 ### Added
@@ -29,6 +88,7 @@ Be aware that code written for 1.9 will not work out of the box because DotSpati
 - The possibility to use static methods to deserialize objects that were serialized to a dspx file and can't be deserialized correctly via their class constructor (FeatureSet, MapSelfLoadGroup, MapSelfLoadLayers from GdalExtension, SpatiaLiteFeatureSet) (#1061)
 - Default mouse cursor button in layout insert toolbar
 - A function to get a reprojected clone of a featureset
+- Auto display children of MapGroup is now an option of the MapFrame
 
 ### Changed
 - Switched to VS2017 and C#7
@@ -66,6 +126,7 @@ Be aware that code written for 1.9 will not work out of the box because DotSpati
 - Removed unnecessary methods in LayoutControl
 
 ### Fixed
+- Plate Carree projection (EPSG: 32662) not found (#1078)
 - Satellite's missing properties (#958)
 - Parameters for the Austrian Bundesmeldenetz in DotSpatial.Projections.ProjectedCategories.NationalGrids are incorrect (#855)
 - Raster extent shifts from correct extent (#725)
@@ -154,3 +215,11 @@ Be aware that code written for 1.9 will not work out of the box because DotSpati
 - Create Categories for symbology is inconsistent with large datasets (#1242)
 - Geographic projections now have a Name property
 - Drawing order of labels is given precedence from top to bottom layer (#1226)
+- DotSpatial Projection with GridShift is Extremely Slow for NAD27 (#1333)
+- Potential Bug in RasterBoundsExt class CellsContainingExtent(...) method (#1332)
+- Potential bug in EnvelopeExt (and ExtentExt) class Reproportion(...) method (#1326)
+- Bug in AzimuthalEquidistant class (#1342)
+- Bug in moving legend items (#1368)
+- Bug in ExtentExt.Reproportion discussed in #1351 (#1370)
+- False polygon outlines are drawn at map boundary when not in edit mode (#1474)
+- Non UI Projects as .netstandard2.0 libraries (#1479 )

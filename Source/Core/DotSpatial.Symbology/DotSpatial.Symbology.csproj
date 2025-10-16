@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Description>Customize map cartographic symbols.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetTopologySuite" Version="2.4.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotSpatial.Data\DotSpatial.Data.csproj" />
+    <ProjectReference Include="..\DotSpatial.NTSExtension\DotSpatial.NTSExtension.csproj" />
+    <ProjectReference Include="..\DotSpatial.Projections\DotSpatial.Projections.csproj" />
+    <ProjectReference Include="..\DotSpatial.Serialization\DotSpatial.Serialization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SymbologyImages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SymbologyImages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="SymbologyImages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SymbologyImages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

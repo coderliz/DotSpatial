@@ -1,0 +1,75 @@
+﻿// Copyright (c) DotSpatial Team. All rights reserved.
+// Licensed under the MIT license. See License.txt file in the project root for full license information.
+
+using DotSpatial.Controls;
+using DotSpatial.Controls.Header;
+
+namespace DotSpatial.Plugins.StatusBarImprovements
+{
+    /// <summary>
+    /// Displays latitude and longitude coordinates at the current cursor position.
+    /// </summary>
+    public class StatusShowCoordinates : Extension
+    {
+        #region Fields
+
+        private Map _map;
+        private readonly StatusPanel _xPanel;
+        private readonly StatusPanel _yPanel;
+
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the StatusShowCoordinates class.
+        /// </summary>
+        public StatusShowCoordinates()
+        {
+            _xPanel = new StatusPanel
+            {
+                Width = 160
+            };
+
+            _yPanel = new StatusPanel
+            {
+                Width = 160
+            };
+        }
+
+        #region Methods
+
+        /// <inheritdoc />
+        public override void Activate()
+        {
+            _map = (Map)App.Map;
+            _map.GeoMouseMove += MapGeoMouseMove;
+
+            App.ProgressHandler.Add(_xPanel);
+            App.ProgressHandler.Add(_yPanel);
+
+            base.Activate();
+        }
+
+        /// <inheritdoc />
+        public override void Deactivate()
+        {
+            if (_map != null)
+            {
+                _map.GeoMouseMove -= MapGeoMouseMove;
+            }
+
+            App.ProgressHandler.Remove(_xPanel);
+            App.ProgressHandler.Remove(_yPanel);
+
+            App.HeaderControl.RemoveAll();
+            base.Deactivate();
+        }
+
+        private void MapGeoMouseMove(object sender, GeoMouseArgs e)
+        {
+            _xPanel.Caption = string.Format("X: {0:.#####}", e.GeographicLocation.X);
+            _yPanel.Caption = string.Format("Y: {0:.#####}", e.GeographicLocation.Y);
+        }
+
+        #endregion
+    }
+}

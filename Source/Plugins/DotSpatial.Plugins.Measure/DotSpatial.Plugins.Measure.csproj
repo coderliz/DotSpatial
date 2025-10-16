@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Core\DotSpatial.Controls\DotSpatial.Controls.csproj">
+			<Private>False</Private>
+			<CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+			<CopyLocal>False</CopyLocal>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Core\DotSpatial.Data\DotSpatial.Data.csproj">
+			<Private>False</Private>
+			<CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+			<CopyLocal>False</CopyLocal>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Core\DotSpatial.Extensions\DotSpatial.Extensions.csproj">
+			<Private>False</Private>
+			<CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+			<CopyLocal>False</CopyLocal>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Core\DotSpatial.Projections\DotSpatial.Projections.csproj">
+			<Private>False</Private>
+			<CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+			<CopyLocal>False</CopyLocal>
+		</ProjectReference>
+		<ProjectReference Include="..\..\Core\DotSpatial.Symbology\DotSpatial.Symbology.csproj">
+			<Private>False</Private>
+			<CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+			<CopyLocal>False</CopyLocal>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>
